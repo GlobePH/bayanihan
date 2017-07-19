@@ -3,6 +3,7 @@
  * Author: Kenneth Bastian <kenneth.g.bastian@descouvre.com>
  */
 const redis = require('redis');
+const winston = require('winston');
 const listName = 'bayanihan';
 let client = null;
 
@@ -15,11 +16,11 @@ module.exports.init = function init(config, done) {
     });
     client
       .on('error', function(err) {
-        console.error('Redis error:', err);
+        winston.log('error', 'Redis error:', err);
         done();
       })
       .on('connect', (e) => {
-        console.log('Connected to redis: ' + config.redis.host);
+        winston.log('info', 'Connected to redis: ' + config.redis.host);
         done();
       });
   }

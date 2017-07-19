@@ -8,6 +8,8 @@ const app = express();
 const http = require('http').createServer(app);
 const config = require('./modules/config');
 const redis = require('./modules/redis');
+const winston = require('winston');
+
 
 //- Middlewares
 const bodyParser = require('body-parser');
@@ -19,9 +21,6 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '5mb' }));
 app.use(bodyParser.json({ limit: '5mb' }));
 app.use(helmet());
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
-app.use((err, req, res, next) => {
-  next();
-});
 
 app.get('/', (req, res, next) => {
   const start = Number(req.query.start);
@@ -35,19 +34,26 @@ app.get('/', (req, res, next) => {
 
 app.post('/sms', (req, res, next) => {
   if(!req.body) { return res.status(400).send({ ok: false, message: 'No response body available' }); }
+  winston.log('debug', '/sms-body', req.body);
   const rc = new ResponseCall(req.body);
   redis.lpushResponseCall(rc, (err) => {
     if(err) { return res.status(500).send({ ok: false, message: 'SMS not acknowledged' }); }
 
-    console.log(rc.print);
+    winston.log('debug', rc.print);
     res.status(201).send({ ok: true, message: 'SMS acknowledged' });
   });
 });
 
+app.use((err, req, res, next) => {
+  winston.log('error', err);
+  res.status(500).send({ ok: false, message: 'Internal server error' });
+});
+
 const port = process.env.PORT || config.port;
+winston.level = config.logging;
 redis.init(config, () => {
   http.listen(port, () => {
-    console.log('App started listening to port:', port);
+    winston.log('info', 'App started listening to port:', port);
   });
 });
 

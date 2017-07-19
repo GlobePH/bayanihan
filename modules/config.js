@@ -16,7 +16,8 @@ module.exports = {
       pass: process.env.REDIS_KEY
     },
     root: rootPath,
-    port: process.env.PORT || 6510
+    port: process.env.PORT || 6510,
+    logging: 'debug'
   },
   dev: {
     redis: {
@@ -25,7 +26,8 @@ module.exports = {
       pass: process.env.REDIS_KEY
     },
     root: rootPath,
-    port: process.env.PORT || 6510
+    port: process.env.PORT || 6510,
+    logging: 'debug'
   }
 }[env];
 
