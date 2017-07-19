@@ -1,3 +1,7 @@
+/**
+ * Filename: ./modules/config.js
+ * Author: Kenneth Bastian <kenneth.g.bastian@descouvre.com>
+ */
 const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const path = require('path');

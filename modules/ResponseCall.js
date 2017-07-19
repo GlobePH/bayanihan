@@ -1,7 +1,8 @@
 /**
- * ResponseCall.js
+ * Filename: ./modules/ResponseCall.js
+ * Author: Kenneth Bastian <kenneth.g.bastian@descouvre.com>
  */
-
+'use strict';
 const moment = require('moment');
 
 class ResponseCall {
@@ -18,7 +19,7 @@ class ResponseCall {
   }
 
   get print() {
-    return moment().format('MMM DD, YYYY HH:mm:ss') + ' '  + this.mobileNumber + ' by ' + 
+    return moment().format('MMMM DD, YYYY HH:mm:ss') + ' '  + this.mobileNumber + ' by ' +
       this.name  + ' on (' + this.latitude + ',' + this.longitude + ')';
   }
 }
