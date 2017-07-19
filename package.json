@@ -1,0 +1,39 @@
+{
+  "name": "bayanihan",
+  "version": "0.0.1",
+  "description": "A simple emergency response web server",
+  "main": "app.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/onezeronine/bayanihan.git"
+  },
+  "keywords": [
+    "emergency",
+    "system",
+    "simple",
+    "bayanihan",
+    "ph"
+  ],
+  "author": "kenneth.g.bastian@descouvre.com",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/onezeronine/bayanihan/issues"
+  },
+  "homepage": "https://github.com/onezeronine/bayanihan#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3",
+    "helmet": "^3.6.1",
+    "moment": "^2.18.1",
+    "morgan": "^1.8.2",
+    "pug": "^2.0.0-rc.2",
+    "redis": "^2.7.1",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "gulp-eslint": "^4.0.0"
+  }
+}

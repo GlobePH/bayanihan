@@ -1,0 +1,71 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-bitwise": "error",
+        "camelcase": "error",
+        "curly": "error",
+        "eqeqeq": "error",
+        "guard-for-in": "error",
+        "no-extend-native": "error",
+        "wrap-iife": ["error", "inside"],
+        "indent": ["error", 2],
+        "no-use-before-define": ["error", { "functions": false, "classes": true }],
+        "new-cap": ["error", { "capIsNewExceptions": ["Server", "API"] }],
+        "no-caller": "error",
+        "no-new": "error",
+        "no-plusplus": "off",
+        "quotes": ["error", "single"],
+        "no-unused-vars": ["error", { "vars": "local", "args": "none" }],
+        "max-params": ["error", 10],
+        "max-depth": ["error", 5],
+        "max-statements": ["error", 40],
+        "complexity": ["error", 8],
+        "max-len": ["error", { "code": 120, "ignoreComments": true, "ignoreRegExpLiterals": true }],
+        "no-implicit-coercion": "error",
+        "one-var": ["error", "never"],
+        "space-before-function-paren": ["error", "never"],
+        "no-trailing-spaces": "error",
+        "keyword-spacing": ["error", { "overrides": {
+            "if": { "after": false },
+            "for": { "after": false },
+            "while": { "after": false },
+            "switch": { "after": false }
+        } }],
+        "semi": "error",
+        "operator-linebreak": ["error", "after"],
+        "consistent-this":  ["error", "self"],
+        "no-console": "off",
+        "no-extra-boolean-cast": "off",
+        "no-constant-condition": ["error", { "checkLoops": false }]
+    },
+    "globals": {
+        "$": false,
+        "handleError": false,
+        "describe": false,
+        "it": false,
+        "before": false,
+        "beforeEach": false,
+        "after": false,
+        "afterEach": false,
+        "MediumEditor": true,
+        "_": false,
+        "NProgress": true,
+        "Modernizr": true,
+        "moment": false,
+        "io": false,
+        "ga": false,
+        "Sortable": false
+    }
+}
