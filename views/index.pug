@@ -23,7 +23,10 @@ html
               div(v-bind:class="{ 'critical': row.category === 'critical', 'major': row.category === 'major' }") {{ row.category }}
             td {{ row.friendlyDate }}
             td {{ row.mobileNumber }}
-            td {{ row.message }} 
+            td
+              div(v-if="isCoordinates(row.message)")
+                a(:href="getMapURL(row.message)" target="_blank") {{ row.message }}
+              div(v-else) {{ row.message }}
             td 
               button(type="button" class="btn btn-primary") Notify
           

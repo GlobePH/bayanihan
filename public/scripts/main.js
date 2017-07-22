@@ -23,8 +23,18 @@
             console.log(response);
           });
       },
-      getMapURL: function(row) {
-        return 'https://www.google.com/maps/preview/@' + row.latitude + ',' + row.longitude + ',20z';
+      getMapURL: function(message) {
+        var coords = message.split(' ');
+        var latitude = Number(coords[0]);
+        var longtitude = Number(coords[1]);
+        return 'https://www.google.com/maps/preview/@' + latitude + ',' + longtitude + ',20z';
+      },
+      isCoordinates: function(message) {
+        var coords = message.split(' ');
+        if(coords.length !== 2) { return false; }
+        var latitude = Number(coords[0]);
+        var longtitude = Number(coords[1]);
+        return !isNaN(latitude) && !isNaN(longtitude);
       }
     }
   });
