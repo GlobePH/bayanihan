@@ -27,7 +27,7 @@ module.exports.init = function init(config, done) {
 };
 
 module.exports.lpushResponseCall = function lpushResponseCall(rc, done) {
-  client.lpush(listName, rc.print, (err, res) => {
+  client.lpush(listName, rc.raw, (err, res) => {
     if(err) { return done(err); }
     done();
   });

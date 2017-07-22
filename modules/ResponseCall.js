@@ -22,6 +22,24 @@ class ResponseCall {
     return moment().format('MMMM DD, YYYY HH:mm:ss') + ' '  + this.mobileNumber + ' by ' +
       this.name  + ' on (' + this.latitude + ',' + this.longitude + ')';
   }
+
+  get raw() {
+    return moment().toISOString()+ ' ' + this.mobileNumber + ' ' + this.name + ' ' + 
+      this.latitude + ' ' + this.longitude + ' ' + this.action;
+  }
+
+  static map(rawRC) {
+    let arrayData = rawRC.split(' ');
+    let objectData = {
+      timestamp: arrayData[0],
+      mobileNumber: arrayData[1],
+      latitude: arrayData[3],
+      longitude: arrayData[4],
+      name: arrayData[2],
+      action: arrayData[5]
+    };
+    return objectData;
+  }
 }
 
 module.exports = ResponseCall;

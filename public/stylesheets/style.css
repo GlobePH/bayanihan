@@ -1,0 +1,11 @@
+.victim-table{
+    width: 100%;
+}
+.victim-table tr th{
+    font-weight: bold;
+    font-size: 18px;
+}
+.victim-table tr td, .victim-table tr th{
+    padding: 5px;
+    text-align: left;
+}

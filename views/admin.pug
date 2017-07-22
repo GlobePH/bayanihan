@@ -1,0 +1,48 @@
+doctype html
+html
+    head
+        title Project Baynihan
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        
+    body
+        section#mainTable
+            h2 Let's start shall we?
+            table.victim-table(cellpadding="0" cellspacing="0" border="1")
+                tr(v-for="row in rows")
+                    td 
+                        p {{ row.name }}
+                    td 
+                        p {{ row.timestamp }}
+                    td  
+                        p {{ row.mobileNumber }}
+                    td 
+                        p ({{ row.longitude }},{{ row.latitude }})
+                tr
+                    td
+                        a(@click="removeRow") Remove
+
+            script(type="text/javascript" src="/scripts/vue.min.js")
+            script(type="text/javascript" src="/scripts/vue-resource.min.js")
+            script(type="text/javascript" src="/scripts/main.js")
+        //- h2 Let's start shall we?
+        //- table.table
+        //-     thead
+        //-         tr
+        //-             td Name 
+        //-             td Location
+        //-             td Age
+        //-             td
+            
+        //-     tbody
+        //-         tr(v-for="row in rows")
+        //-             td 
+        //-                 input(type="text" v-model="row.name") 
+        //-             td 
+        //-                 input(type="text" v-model="row.location")
+        //-             td 
+        //-                 input(type="text" v-model="row.age")
+        //-             td 
+        //-                 a(@click="removeRow") Remove 
+                
+        //- div
+        //-     button(class="button btn-primary" @click="addRow") Add row 
