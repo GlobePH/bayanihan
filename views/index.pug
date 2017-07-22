@@ -2,8 +2,8 @@ doctype html
 html
   head
       title Project Baynihan
-      link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-      link(rel='stylesheet', href='/stylesheets/style.css')
+      link(rel="stylesheet" href="/stylesheets/bootstrap.min.css")
+      link(rel="stylesheet" href="/stylesheets/style.css")
       link(href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet")
       
   body
@@ -19,7 +19,8 @@ html
             th Actions
                    
           tr(v-for="row in rows")
-            td {{ row.category }}
+            td
+              div(v-bind:class="{ 'critical': row.category === 'critical', 'major': row.category === 'major' }") {{ row.category }}
             td {{ row.friendlyDate }}
             td {{ row.mobileNumber }}
             td {{ row.message }} 
