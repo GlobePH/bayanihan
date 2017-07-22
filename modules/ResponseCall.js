@@ -7,15 +7,15 @@ const moment = require('moment');
 
 class ResponseCall {
   constructor(body) {
-    body = body || {};
-    let self = this;
-    const splits = body.message.split(' ');
-    const coords = splits[0].split(',');
-    self.mobileNumber = body.mobile;
-    self.latitude = coords[0];
-    self.longitude = coords[1];
-    self.name = splits[1];
-    self.action = splits[2];
+    // body = body || {};
+    // let self = this;
+    // const splits = body.message.split(' ');
+    // const coords = splits[0].split(',');
+    // self.mobileNumber = body.mobile;
+    // self.latitude = coords[0];
+    // self.longitude = coords[1];
+    // self.name = splits[1];
+    // self.action = splits[2];
   }
 
   get print() {
@@ -40,6 +40,18 @@ class ResponseCall {
       action: arrayData[5]
     };
     return objectData;
+  }
+
+  static formatBody(inboundSMSMessage) {
+    const splits = inboundSMSMessage.message.split(' ');
+    const coords = splits[0].split(',');
+    const rc = new ResponseCall();
+    rc.mobileNumber = inboundSMSMessage.senderAddress.replace('tel:', '');
+    rc.latitude = coords[0];
+    rc.longitude = coords[1];
+    rc.name = splits[1];
+    rc.action = splits[2];
+    return rc;
   }
 }
 

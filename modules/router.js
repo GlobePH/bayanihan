@@ -2,8 +2,8 @@
  * Filename: ./modules/router.js
  * Author: Kenneth Bastian <kenneth.g.bastian@descouvre.com>
  */
-const ResponseCall = require('./modules/ResponseCall');
-const redis = require('./modules/redis');
+const ResponseCall = require('../modules/ResponseCall');
+const redis = require('../modules/redis');
 const winston = require('winston');
 
 module.exports = function router(app) {
@@ -11,24 +11,38 @@ module.exports = function router(app) {
     res.render('admin', {});
   });
 
-  app.post('/sms', (req, res, next) => {
+  app.post('/globe/sms', (req, res, next) => {
     if(!req.body) { return res.status(400).send({ ok: false, message: 'No response body available' }); }
-    winston.log('debug', '/sms-body', req.body);
-    const rc = new ResponseCall(req.body);
-    redis.lpushResponseCall(rc, (err) => {
-      if(err) { return res.status(500).send({ ok: false, message: 'SMS not acknowledged' }); }
+    winston.log('debug', '/globe/sms-body', req.body);
+    const rcs = req.body.inboundSMSMessageList.inboundSMSMessage.map(ResponseCall.formatBody);
 
-      winston.log('debug', rc.print);
-      res.status(201).send({ ok: true, message: 'SMS acknowledged' });
-    });
+    let queue = [];
+    let counter = 0;
+    for(let i = 0; i < rcs.length; ++i) {
+      queue.push({
+        exec: (rc) => {
+          redis.lpushResponseCall(rc, (err) => {
+            if(err) {
+              winston.log('debug', err);
+              return res.status(500).send({ ok: false, message: 'Cannot save sms' });
+            }
+
+            winston.log('debug', rc.print);
+
+            //- recursive call on exec to create a synchronous flow
+            if(++counter < rcs.length) { return queue[counter].exec(rcs[counter]); }
+
+            return res.status(201).send({ ok: true, message: 'SMS acknowledged' });
+          });
+        }
+      });
+    }
+    queue[0].exec(rcs[0]);
   });
 
   app.get('/sms', (req, res, next) => {
-    const start = Number(req.query.start);
-    const stop = Number(req.query.stop);
-    if(isNaN(start) || isNaN(stop)) {
-      return res.status(400).send({ ok: false, message: 'Invalid start or stop' });
-    }
+    const start = Number(req.query.start) || 0;
+    const stop = Number(req.query.stop) || 100;
     redis.getResponseCalls(start, stop, (err, list) => {
       if(err) { return res.status(500).send({ ok: false, message: 'Cannot get sms list' }); }
 
