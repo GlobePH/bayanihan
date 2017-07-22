@@ -7,15 +7,6 @@ const moment = require('moment');
 
 class ResponseCall {
   constructor(body) {
-    // body = body || {};
-    // let self = this;
-    // const splits = body.message.split(' ');
-    // const coords = splits[0].split(',');
-    // self.mobileNumber = body.mobile;
-    // self.latitude = coords[0];
-    // self.longitude = coords[1];
-    // self.name = splits[1];
-    // self.action = splits[2];
   }
 
   get print() {
@@ -24,22 +15,20 @@ class ResponseCall {
   }
 
   get raw() {
-    return moment().toISOString()+ ' ' + this.mobileNumber + ' ' + this.name + ' ' + 
+    return moment().toISOString() + ' ' + this.mobileNumber + ' ' + this.name + ' ' + 
       this.latitude + ' ' + this.longitude + ' ' + this.action;
   }
 
   static map(rawRC) {
-    let arrayData = rawRC.split(' ');
-    let dateData = moment(arrayData[0]).format('MMMM DD, YYYY h:mm:ss a')
-    let objectData = {
-      timestamp: dateData,
+    const arrayData = rawRC.split(' ');
+    return {
+      timestamp: arrayData[0],
       mobileNumber: arrayData[1],
       latitude: arrayData[3],
       longitude: arrayData[4],
       name: arrayData[2],
       action: arrayData[5]
     };
-    return objectData;
   }
 
   static formatBody(inboundSMSMessage) {
@@ -51,6 +40,7 @@ class ResponseCall {
     rc.longitude = coords[1];
     rc.name = splits[1];
     rc.action = splits[2];
+    rc.timestamp = moment().toISOString();
     return rc;
   }
 }

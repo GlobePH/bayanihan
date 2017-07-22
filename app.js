@@ -5,7 +5,8 @@
 
 const express = require('express');
 const app = express();
-const http = require('http').createServer(app);
+const http = require('http').Server(app);
+const socketIo = require('socket.io')(http);
 const config = require('./modules/config');
 const redis = require('./modules/redis');
 const winston = require('winston');
@@ -24,11 +25,10 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
 app.set('view engine', 'pug');
 
-
 const port = config.port;
 winston.level = config.logging;
 redis.init(config, () => {
-  require('./modules/router')(app);
+  require('./modules/router')(app, socketIo);
   http.listen(port, () => {
     winston.log('info', 'App started listening to port:', port);
   });

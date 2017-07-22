@@ -6,9 +6,25 @@ const ResponseCall = require('../modules/ResponseCall');
 const redis = require('../modules/redis');
 const winston = require('winston');
 
-module.exports = function router(app) {
+module.exports = function router(app, socketIo) {
   app.get('/', (req, res, next) => {
     res.render('admin', {});
+  });
+
+  app.get('/sms', (req, res, next) => {
+    const start = Number(req.query.start) || 0;
+    const stop = Number(req.query.stop) || 100;
+    redis.getResponseCalls(start, stop, (err, list) => {
+      if(err) { return res.status(500).send({ ok: false, message: 'Cannot get sms list' }); }
+
+      res.status(200).send(list.map(ResponseCall.map));
+    });
+  });
+
+  app.get('/globe', (err, req, res, next) => {
+    const code = req.query.code;
+    winston.log('debug', 'Globe code ' + code);
+    res.render('globe', {});
   });
 
   app.post('/globe/sms', (req, res, next) => {
@@ -28,6 +44,7 @@ module.exports = function router(app) {
             }
 
             winston.log('debug', rc.print);
+            socketIo.emit('received-sms', rc);
 
             //- recursive call on exec to create a synchronous flow
             if(++counter < rcs.length) { return queue[counter].exec(rcs[counter]); }
@@ -40,18 +57,22 @@ module.exports = function router(app) {
     queue[0].exec(rcs[0]);
   });
 
-  app.get('/sms', (req, res, next) => {
-    const start = Number(req.query.start) || 0;
-    const stop = Number(req.query.stop) || 100;
-    redis.getResponseCalls(start, stop, (err, list) => {
-      if(err) { return res.status(500).send({ ok: false, message: 'Cannot get sms list' }); }
-
-      res.status(200).send(list.map(ResponseCall.map));
-    });
-  });
-
   app.use((err, req, res, next) => {
     winston.log('error', err);
     res.status(500).send({ ok: false, message: 'Internal server error' });
   });
+
+  socketIo.on('connection', function(socket) {
+    winston.log('info', 'SOCKET: A user has connected');
+
+    socket.on('received-sms', function() {
+
+    });
+
+    socket.on('disconnect', function() {
+      winston.log('info', 'SOCKET: A user has disconnected');
+    });
+  });
+
 };
+

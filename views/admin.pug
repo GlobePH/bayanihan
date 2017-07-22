@@ -17,7 +17,7 @@ html
           td 
             p {{ row.name }}
           td 
-            p {{ row.timestamp }}
+            p {{ getFriendlyTimestamp(row.timestamp) }}
           td  
             p {{ row.mobileNumber }}
           td 
@@ -25,4 +25,5 @@ html
 
   script(type="text/javascript" src="/scripts/vue.min.js")
   script(type="text/javascript" src="/scripts/vue-resource.min.js")
+  script(type="text/javascript" src="/scripts/socket.io.slim.js")
   script(type="text/javascript" src="/scripts/main.js")
