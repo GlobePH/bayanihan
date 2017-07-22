@@ -17,7 +17,11 @@ module.exports = {
     },
     root: rootPath,
     port: process.env.PORT || 6530,
-    logging: 'debug'
+    logging: 'debug',
+    globe: {
+      id: 'qbR5sgpraoIx5iqxqBcrkKIX9bM8sA5M',
+      secret: '47bc01944785c8a9589cf8ab215c9a8d1f1035bb8effefa893bfbe74f1ebb86b'
+    }
   },
   dev: {
     redis: {
@@ -26,8 +30,12 @@ module.exports = {
       pass: process.env.REDIS_KEY
     },
     root: rootPath,
-    port: process.env.PORT || 6520,
-    logging: 'debug'
+    port: process.env.PORT || 6530,
+    logging: 'debug',
+    globe: {
+      id: 'qbR5sgpraoIx5iqxqBcrkKIX9bM8sA5M',
+      secret: '47bc01944785c8a9589cf8ab215c9a8d1f1035bb8effefa893bfbe74f1ebb86b'
+    }
   }
 }[env];
 

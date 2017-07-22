@@ -66,6 +66,6 @@
         "moment": false,
         "io": false,
         "ga": false,
-        "Sortable": false
+        "Vue": false
     }
 }
