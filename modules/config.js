@@ -16,7 +16,7 @@ module.exports = {
       pass: process.env.REDIS_KEY
     },
     root: rootPath,
-    port: process.env.PORT || 6530,
+    port: 6530,
     logging: 'debug',
     globe: {
       id: 'qbR5sgpraoIx5iqxqBcrkKIX9bM8sA5M',
@@ -30,7 +30,7 @@ module.exports = {
       pass: process.env.REDIS_KEY
     },
     root: rootPath,
-    port: process.env.PORT || 6530,
+    port: 6530,
     logging: 'debug',
     globe: {
       id: 'qbR5sgpraoIx5iqxqBcrkKIX9bM8sA5M',

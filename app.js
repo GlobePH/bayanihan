@@ -25,7 +25,7 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 app.set('view engine', 'pug');
 
 
-const port = process.env.PORT || config.port;
+const port = config.port;
 winston.level = config.logging;
 redis.init(config, () => {
   require('./modules/router')(app);
