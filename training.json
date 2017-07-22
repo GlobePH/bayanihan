@@ -2,28 +2,43 @@
   "critical": {
     "messages": [
       "nid ko help dito sa may bgc",
-      "asap dito sa bgc malapit sa market"
+      "asap dito sa bgc malapit sa market",
+      "tulong nabaha ako",
+      "stranded ako need ko rescue asap",
+      "emergency, kailangan ko po ng tulong",
+      "flashflood po sa lugar namin. kailagan ng rescue",
+      "Nabagsakan and bahay namin. Nid help",
+      "Landslide dito, kailangan ng relief goods"
     ],
     "coords": [
-      { "name": "Globe Telecom Tower", "lat": 14.5531943, "long": 121.0498739 }
+      { "name": "Globe Telecom Tower", "lat": 14.5531943, "long": 121.0498739 },
+      { "name": "F1 Hotel Manila", "lat": 14.5536779, "long": 121.0480574 },
+      { "name": "St. Luke`s Medical center", "lat": 14.5531068, "long": 121.0485617 },
+      { "name": "Avida Towers 34h street", "lat": 14.5536007, "long": 121.0525408 },
+      { "name": "Avida Cityflex Towers", "lat": 14.5558854, "long": 121.0491853 },
+      { "name": "S and R", "lat": 14.5545103, "long": 121.0491343 },
+      { "name": "MC Home Depot", "lat": 14.5528581, "long": 121.0493012 },
+      { "name": "The Mind Museum", "lat": 14.5508021, "long": 121.0446734 }
     ]
   },
   "major": {
     "messages": [
-      "wala kami supply dito sa labas ng bahay",
-      "anong problema diyan sa ormoc"
+      "Need first aid kit sa area namin",
+      "Kailangan namin ng pagkain dito sa navotas",
+      "sir naputol yung cable ng kuryente",
+      "umabot na sir sa signal 2 yung bagyo"
     ],
-    "coords": [
-      { "name": "Globe Telecom Tower", "lat": 14.5531943, "long": 121.0498739 }
-    ]
+    "coords": []
   },
   "minor": {
     "messages": [
-      "wer na u dito na me",
-      "saan ka na?"
+      "may bumagsak po na poste dito sa lugar namin",
+      "may bumagsak po na puno",
+      "pre san ka na? Sunudin mo ako dito",
+      "Brownout sa lugar namin",
+      "asan ka na?",
+      "sabi ba naman sa akin ay mahal niya daw ako"
     ],
-    "coords": [
-      { "name": "Globe Telecom Tower", "lat": 14.5531943, "long": 121.0498739 }
-    ]
+    "coords": []
   }
 }

@@ -24,7 +24,7 @@ class SmsMessage {
   static mapFromInbound(im) {
     const smg = new SmsMessage();
     smg.mobileNumber = im.senderAddress.replace('tel:', '');
-    smg.message = im.message;
+    smg.message = (im.message || '').toLowerCase();
     smg.timestamp = moment().toISOString();
     return smg;
   }

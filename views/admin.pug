@@ -2,27 +2,30 @@ doctype html
 html
   head
       title Project Baynihan
+      link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
       link(rel='stylesheet', href='/stylesheets/style.css')
+      link(href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet")
       
   body
-    section#beaconTable
-      h2 Let's start shall we?
-      table.victim-table(cellpadding="0" cellspacing="0" border="1")
-        thead
-          td Name
-          td Timestamp
-          td Mobile Number
-          td Location Coordinates
-        tr(v-for="row in rows")
-          td 
-            p {{ row.name }}
-          td 
-            p {{ getFriendlyTimestamp(row.timestamp) }}
-          td  
-            p {{ row.mobileNumber }}
-          td 
-            a(:href="getMapURL(row)" target="_blank") long,lat({{row.longitude}},{{row.latitude}})
-
+    .container
+      section#beaconTable
+        h2 Bayanihan Disaster Communication
+        table.table(class="table table-bordered")
+          thead
+            th Severity
+            th Timestamp
+            th Mobile Number
+            th Message
+            th Actions
+                   
+          tr(v-for="row in rows")
+            td {{ row.category }}
+            td {{ getFriendlyTimestamp(row.timestamp) }}
+            td {{ row.mobileNumber }}
+            td {{ row.message }} 
+            td 
+              button(type="button" class="btn btn-primary") Notify
+          
   script(type="text/javascript" src="/scripts/vue.min.js")
   script(type="text/javascript" src="/scripts/vue-resource.min.js")
   script(type="text/javascript" src="/scripts/socket.io.slim.js")

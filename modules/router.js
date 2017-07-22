@@ -11,13 +11,23 @@ module.exports = function router(app, socketIo, model) {
     res.render('admin', {});
   });
 
+  app.get('/profile', (req, res, next) => {
+    res.render('profile', {});
+  });
+
   app.get('/sms', (req, res, next) => {
     const start = Number(req.query.start) || 0;
     const stop = Number(req.query.stop) || 100;
+    const name = req.query.name;
     redis.getResponseCalls(start, stop, (err, list) => {
       if(err) { return res.status(500).send({ ok: false, message: 'Cannot get sms list' }); }
 
-      res.status(200).send(list.map(SmsMessage.mapFromCache));
+      const li = list.map(SmsMessage.mapFromCache);
+      if(Boolean(name)) {
+        const filteredList = li.filter(r => r.name === name);
+        return res.status(200).send(filteredList);
+      }
+      res.status(200).send(li);
     });
   });
 
