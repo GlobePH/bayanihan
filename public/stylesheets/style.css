@@ -6,6 +6,10 @@
     font-size: 18px;
 }
 .victim-table tr td, .victim-table tr th{
-    padding: 5px;
+    padding: 10px 15px;
+    text-align: left;
+}
+.victim-table tr td p{
+    margin: 0px;
     text-align: left;
 }

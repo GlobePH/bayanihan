@@ -7,11 +7,11 @@
             rows: [
             ]
         },
+        beforeMount(){
+            this.getVictims()
+        },
         methods:{
-            addRow: function(){
-                // this.rows.push({name:"",location:"",age:""});
-            },
-            removeRow: function(row){
+            getVictims: function(row){
                 this.$http.get('/sms')
                 .then(function(response) {
                     this.rows = response.body;

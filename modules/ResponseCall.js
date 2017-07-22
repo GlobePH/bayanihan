@@ -30,8 +30,9 @@ class ResponseCall {
 
   static map(rawRC) {
     let arrayData = rawRC.split(' ');
+    let dateData = moment(arrayData[0]).format('MMMM DD, YYYY h:mm:ss a')
     let objectData = {
-      timestamp: arrayData[0],
+      timestamp: dateData,
       mobileNumber: arrayData[1],
       latitude: arrayData[3],
       longitude: arrayData[4],
