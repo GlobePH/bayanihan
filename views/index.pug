@@ -20,7 +20,7 @@ html
                    
           tr(v-for="row in rows")
             td {{ row.category }}
-            td {{ getFriendlyTimestamp(row.timestamp) }}
+            td {{ row.friendlyDate }}
             td {{ row.mobileNumber }}
             td {{ row.message }} 
             td 

@@ -4,11 +4,23 @@
       "nid ko help dito sa may bgc",
       "asap dito sa bgc malapit sa market",
       "tulong nabaha ako",
+      "tlngan nyo po ako",
       "stranded ako need ko rescue asap",
       "emergency, kailangan ko po ng tulong",
       "flashflood po sa lugar namin. kailagan ng rescue",
       "Nabagsakan and bahay namin. Nid help",
-      "Landslide dito, kailangan ng relief goods"
+      "kailangan po ng rescue, may mga patay na dito",
+      "malaki na po ang sunog dito",
+      "kailangan po ng ambulansya dito",
+      "padala na po kayo ng reskyu unit. malala na dito",
+      "matinde na po ang sitwasyon sa lugar namin",
+      "kritikal na ako. nid ng help please",
+      "mamamatay na ako",
+      "May mga matanda at bata dito, kailangan namin ng rescue",
+      "kailangan ng tulong ng pamilya ko",
+      "lubog na kami sa baha",
+      "magpadala na kayo ng tulong",
+      "malala na ang sitwasyon dito"
     ],
     "coords": [
       { "name": "Globe Telecom Tower", "lat": 14.5531943, "long": 121.0498739 },
@@ -25,6 +37,13 @@
     "messages": [
       "Need first aid kit sa area namin",
       "Kailangan namin ng pagkain dito sa navotas",
+      "baha na sa espanya",
+      "Nagkakaubusan na po ng suplay ng pagkain at tubig",
+      "Kailangan ng bumbero dito",
+      "Sumabog and poste namin",
+      "baha na sa lugar namin",
+      "kailangan namin ng relief goods",
+      "tumataas na ang tubig dito",
       "sir naputol yung cable ng kuryente",
       "umabot na sir sa signal 2 yung bagyo"
     ],
@@ -37,7 +56,9 @@
       "pre san ka na? Sunudin mo ako dito",
       "Brownout sa lugar namin",
       "asan ka na?",
-      "sabi ba naman sa akin ay mahal niya daw ako"
+      "sabi ba naman sa akin ay mahal niya daw ako",
+      "walang kuryente samin",
+      "walang suplay ng tubig at kuryente dito sa lugar namin"
     ],
     "coords": []
   }

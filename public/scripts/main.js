@@ -23,11 +23,6 @@
             console.log(response);
           });
       },
-      getFriendlyTimestamp: function(timestamp) {
-        var a = new Date(timestamp);
-        return a.getFullYear() + '-' + (a.getMonth() + 1) + '-' + a.getDate() + ' ' + 
-          a.getHours() + ':' + a.getMinutes() + ':' + a.getSeconds();
-      },
       getMapURL: function(row) {
         return 'https://www.google.com/maps/preview/@' + row.latitude + ',' + row.longitude + ',20z';
       }

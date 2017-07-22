@@ -18,6 +18,7 @@ class SmsMessage {
     msg.mobileNumber = splits[1];
     msg.category = splits[2];
     msg.message = splits[3];
+    msg.friendlyDate = moment(msg.timestamp).format('MMM DD, YYYY HH:mm:ss');
     return msg;
   }
 
@@ -26,6 +27,7 @@ class SmsMessage {
     smg.mobileNumber = im.senderAddress.replace('tel:', '');
     smg.message = (im.message || '').toLowerCase();
     smg.timestamp = moment().toISOString();
+    smg.friendlyDate = moment(smg.timestamp).format('MMM DD, YYYY HH:mm:ss');
     return smg;
   }
 }

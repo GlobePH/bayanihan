@@ -8,7 +8,7 @@ const winston = require('winston');
 
 module.exports = function router(app, socketIo, model) {
   app.get('/', (req, res, next) => {
-    res.render('admin', {});
+    res.render('index', {});
   });
 
   app.get('/profile', (req, res, next) => {
@@ -54,7 +54,7 @@ module.exports = function router(app, socketIo, model) {
               return res.status(500).send({ ok: false, message: 'Cannot save sms' });
             }
 
-            winston.log('debug', msg.print);
+            winston.log('debug', msg);
             socketIo.emit('received-sms', msg);
 
             //- recursive call on exec to create a synchronous flow
