@@ -1,0 +1,29 @@
+{
+  "critical": {
+    "messages": [
+      "nid ko help dito sa may bgc",
+      "asap dito sa bgc malapit sa market"
+    ],
+    "coords": [
+      { "name": "Globe Telecom Tower", "lat": 14.5531943, "long": 121.0498739 }
+    ]
+  },
+  "major": {
+    "messages": [
+      "wala kami supply dito sa labas ng bahay",
+      "anong problema diyan sa ormoc"
+    ],
+    "coords": [
+      { "name": "Globe Telecom Tower", "lat": 14.5531943, "long": 121.0498739 }
+    ]
+  },
+  "minor": {
+    "messages": [
+      "wer na u dito na me",
+      "saan ka na?"
+    ],
+    "coords": [
+      { "name": "Globe Telecom Tower", "lat": 14.5531943, "long": 121.0498739 }
+    ]
+  }
+}

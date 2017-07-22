@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/onezeronine/bayanihan#readme",
   "dependencies": {
+    "bayes": "0.0.7",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "express-static": "^1.2.4",

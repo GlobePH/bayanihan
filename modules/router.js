@@ -2,11 +2,11 @@
  * Filename: ./modules/router.js
  * Author: Kenneth Bastian <kenneth.g.bastian@descouvre.com>
  */
-const ResponseCall = require('../modules/ResponseCall');
+const SmsMessage = require('../modules/SmsMessage');
 const redis = require('../modules/redis');
 const winston = require('winston');
 
-module.exports = function router(app, socketIo) {
+module.exports = function router(app, socketIo, model) {
   app.get('/', (req, res, next) => {
     res.render('admin', {});
   });
@@ -17,7 +17,7 @@ module.exports = function router(app, socketIo) {
     redis.getResponseCalls(start, stop, (err, list) => {
       if(err) { return res.status(500).send({ ok: false, message: 'Cannot get sms list' }); }
 
-      res.status(200).send(list.map(ResponseCall.map));
+      res.status(200).send(list.map(SmsMessage.mapFromCache));
     });
   });
 
@@ -30,31 +30,32 @@ module.exports = function router(app, socketIo) {
   app.post('/globe/sms', (req, res, next) => {
     if(!req.body) { return res.status(400).send({ ok: false, message: 'No response body available' }); }
     winston.log('debug', '/globe/sms-body', req.body);
-    const rcs = req.body.inboundSMSMessageList.inboundSMSMessage.map(ResponseCall.formatBody);
+    const msgs = req.body.inboundSMSMessageList.inboundSMSMessage.map(SmsMessage.mapFromInbound);
 
     let queue = [];
     let counter = 0;
-    for(let i = 0; i < rcs.length; ++i) {
+    for(let i = 0; i < msgs.length; ++i) {
       queue.push({
-        exec: (rc) => {
-          redis.lpushResponseCall(rc, (err) => {
+        exec: (msg) => {
+          msg.category = model.classifier.categorize(msg.message);
+          redis.lpushResponseCall(msg, (err) => {
             if(err) {
               winston.log('debug', err);
               return res.status(500).send({ ok: false, message: 'Cannot save sms' });
             }
 
-            winston.log('debug', rc.print);
-            socketIo.emit('received-sms', rc);
+            winston.log('debug', msg.print);
+            socketIo.emit('received-sms', msg);
 
             //- recursive call on exec to create a synchronous flow
-            if(++counter < rcs.length) { return queue[counter].exec(rcs[counter]); }
+            if(++counter < msgs.length) { return queue[counter].exec(msgs[counter]); }
 
             return res.status(201).send({ ok: true, message: 'SMS acknowledged' });
           });
         }
       });
     }
-    queue[0].exec(rcs[0]);
+    queue[0].exec(msgs[0]);
   });
 
   app.use((err, req, res, next) => {
@@ -64,10 +65,6 @@ module.exports = function router(app, socketIo) {
 
   socketIo.on('connection', function(socket) {
     winston.log('info', 'SOCKET: A user has connected');
-
-    socket.on('received-sms', function() {
-
-    });
 
     socket.on('disconnect', function() {
       winston.log('info', 'SOCKET: A user has disconnected');

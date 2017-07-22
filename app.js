@@ -15,6 +15,7 @@ const winston = require('winston');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
+const model = require('./modules/model');
 
 app.use(express.static(__dirname + '/public'));
 
@@ -28,7 +29,7 @@ app.set('view engine', 'pug');
 const port = config.port;
 winston.level = config.logging;
 redis.init(config, () => {
-  require('./modules/router')(app, socketIo);
+  require('./modules/router')(app, socketIo, model);
   http.listen(port, () => {
     winston.log('info', 'App started listening to port:', port);
   });
