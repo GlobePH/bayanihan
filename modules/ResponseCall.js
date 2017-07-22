@@ -23,6 +23,7 @@ class ResponseCall {
     const arrayData = rawRC.split(' ');
     return {
       timestamp: arrayData[0],
+      friendlyTimestamp: moment(arrayData[0]).format('MMMM D, YYYY h:mm:ss a'),
       mobileNumber: arrayData[1],
       latitude: arrayData[3],
       longitude: arrayData[4],
@@ -41,6 +42,7 @@ class ResponseCall {
     rc.name = splits[1];
     rc.action = splits[2];
     rc.timestamp = moment().toISOString();
+    rc.friendlyTimestamp = moment().format('MMMM D, YYYY h:mm:ss a');
     return rc;
   }
 }
