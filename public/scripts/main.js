@@ -27,7 +27,7 @@
         var coords = message.split(' ');
         var latitude = Number(coords[0]);
         var longtitude = Number(coords[1]);
-        return 'https://www.google.com/maps/preview/@' + latitude + ',' + longtitude + ',20z';
+        return 'https://google.com/maps/?q=' + latitude + ',' + longtitude;
       },
       isCoordinates: function(message) {
         var coords = message.split(' ');
