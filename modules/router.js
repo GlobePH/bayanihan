@@ -15,6 +15,10 @@ module.exports = function router(app, socketIo, model) {
     res.render('profile', {});
   });
 
+  app.get('/map', (req, res, next) => {
+    res.render('map', {});
+  });
+
   app.get('/sms', (req, res, next) => {
     const start = Number(req.query.start) || 0;
     const stop = Number(req.query.stop) || 100;

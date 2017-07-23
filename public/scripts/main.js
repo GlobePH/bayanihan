@@ -5,6 +5,14 @@
   var app  = new Vue({
     el: '#beaconTable',
     data: {
+      mapName: 'map',
+      markerCoordinates: [{
+            latitude: 14.5528519,
+            longitude: 121.05085
+      }],
+      map: null,
+      bounds: null,
+      markers: [],
       rows: []
     },
     beforeMount() {
@@ -12,6 +20,28 @@
       self.getVictims();
       socket.on('received-sms', function(rc) {
         self.rows = [].concat([rc], self.rows);
+      });
+    },
+    mounted: function () {
+      this.bounds = new google.maps.LatLngBounds();
+
+      const element = document.getElementById('map');
+      const mapCentre = this.markerCoordinates[0];
+      const options = {
+        center: new google.maps.LatLng(mapCentre.latitude, mapCentre.longitude)
+      };
+
+      this.map = new google.maps.Map(element, options);
+
+      this.markerCoordinates.forEach((coord) => {
+        const position = new google.maps.LatLng(coord.latitude, coord.longitude);
+        const marker = new google.maps.Marker({ 
+            position,
+            map: this.map
+        });
+
+        this.markers.push(marker);
+        this.map.fitBounds(this.bounds.extend(position));
       });
     },
     methods:{
