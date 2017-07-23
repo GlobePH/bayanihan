@@ -13,22 +13,22 @@ html
         table.table(class="table table-bordered")
           thead
             th Severity
+            th Name
             th Timestamp
-            th Mobile Number
+            th Mobile No.
             th Message
-            th Actions
                    
           tr(v-for="row in rows")
             td
               div(v-bind:class="{ 'critical': row.category === 'critical', 'major': row.category === 'major' }") {{ row.category }}
+            td
+                span {{ row.name }}
             td {{ row.friendlyDate }}
             td {{ row.mobileNumber }}
             td
               div(v-if="isCoordinates(row.message)")
                 a(:href="getMapURL(row.message)" target="_blank") {{ row.message }}
               div(v-else) {{ row.message }}
-            td 
-              button(type="button" class="btn btn-primary") Notify
           
   script(type="text/javascript" src="/scripts/vue.min.js")
   script(type="text/javascript" src="/scripts/vue-resource.min.js")
