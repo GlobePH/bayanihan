@@ -33,15 +33,28 @@
 
       this.map = new google.maps.Map(element, options);
 
-      this.markerCoordinates.forEach((coord) => {
-        const position = new google.maps.LatLng(coord.latitude, coord.longitude);
-        const marker = new google.maps.Marker({ 
-            position,
-            map: this.map
-        });
+      this.$http.get('/sms')
+      .then(function(response) {
+        response.body.forEach((respo) => {
+          if(this.isCoordinates(respo.message)){
 
-        this.markers.push(marker);
-        this.map.fitBounds(this.bounds.extend(position));
+            var longlat = respo.message.split(' ');
+
+            var lat = longlat[0];
+            var long = longlat[1];
+
+            const position = new google.maps.LatLng(lat, long);
+            const marker = new google.maps.Marker({ 
+                position,
+                map: this.map
+            });
+
+            this.markers.push(marker);
+            this.map.fitBounds(this.bounds.extend(position));
+          }
+        });
+      }, function(response) {
+        console.log(response);
       });
     },
     methods:{
@@ -53,6 +66,31 @@
             console.log(response);
           });
       },
+      getVictimsMap: function(){
+        this.$http.get('/sms')
+          .then(function(response) {
+            response.body.forEach((respo) => {
+              if(this.isCoordinates(respo.message)){
+
+                var longlat = respo.message.split(' ');
+
+                var lat = longlat[0];
+                var long = longlat[1];
+
+                const position = new google.maps.LatLng(lat, long);
+                const marker = new google.maps.Marker({ 
+                    position,
+                    map: this.map
+                });
+
+                this.markers.push(marker);
+                this.map.fitBounds(this.bounds.extend(position));
+              }
+            });
+          }, function(response) {
+            console.log(response);
+          });
+      },  
       getMapURL: function(message) {
         var coords = message.split(' ');
         var latitude = Number(coords[0]);
